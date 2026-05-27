@@ -2,14 +2,15 @@
 
 A modern AI-style FAQ discussion platform built with React, TypeScript, Tailwind CSS, and Supabase.
 
-![FAQ_Session Banner](https://images.pexels.com/photo/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=400&dpr=2)
+![FAQ_Session Banner](https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=400&dpr=2)
 
 ## Overview
 
-FAQ_Session is a community-driven question and answer platform designed with a modern dark UI featuring glassmorphism effects and smooth animations. Users can ask questions, provide answers, and engage in meaningful discussions.
+FAQ_Session is a community-driven question and answer platform designed with a modern dark UI featuring glassmorphism effects and smooth animations. Users can ask questions, provide answers, and engage in meaningful discussions. Inspired by internship portals like Samagama, Yaksha AI, and IIT help desks.
 
 ## Features
 
+### Core Features
 - **Public FAQ Browsing** - Browse and search FAQs without authentication
 - **User Authentication** - Secure email/password authentication with Supabase Auth
 - **Ask Questions** - Create new FAQs with categories and tags
@@ -18,6 +19,12 @@ FAQ_Session is a community-driven question and answer platform designed with a m
 - **Search & Filter** - Search FAQs by keyword and filter by category
 - **Responsive Design** - Fully responsive across all devices
 - **Modern UI** - Dark theme with glassmorphism and smooth animations
+
+### Advanced Features
+- **Yaksha Mini AI Chatbot** - AI-powered assistant for instant answers
+- **Voice Assistant** - Speech-to-text support for voice commands
+- **File Upload** - Document and image upload support
+- **AI Help Desk** - Centralized AI-powered support portal
 
 ## Tech Stack
 
@@ -53,7 +60,14 @@ src/
 │   ├── CategoryFilter.tsx
 │   ├── HeroSection.tsx
 │   ├── ProtectedRoute.tsx
-│   └── LoadingSpinner.tsx
+│   ├── LoadingSpinner.tsx
+│   ├── YakshaMini.tsx       # AI Chatbot
+│   ├── ChatbotButton.tsx    # Floating chat button
+│   ├── ChatMessage.tsx      # Chat bubble component
+│   ├── SuggestedQuestions.tsx
+│   ├── TypingIndicator.tsx
+│   ├── VoiceAssistant.tsx   # Voice support
+│   └── FileUploader.tsx     # File upload
 │
 ├── context/             # React context providers
 │   └── AuthContext.tsx
@@ -69,6 +83,7 @@ src/
 │   ├── Register.tsx
 │   ├── AddFAQ.tsx
 │   ├── Profile.tsx
+│   ├── AIHelpDesk.tsx       # AI Help Desk
 │   └── NotFound.tsx
 │
 ├── routes/              # Routing configuration
@@ -78,7 +93,8 @@ src/
 │   └── supabase.ts
 │
 ├── types/               # TypeScript types
-│   └── database.ts
+│   ├── database.ts
+│   └── speech.d.ts
 │
 ├── utils/               # Utility functions
 │   └── constants.ts
@@ -87,6 +103,87 @@ src/
 ├── main.tsx             # Entry point
 └── index.css            # Global styles
 ```
+
+## Yaksha Mini AI Chatbot
+
+Yaksha Mini is our AI-powered assistant that helps users find answers quickly.
+
+### Features
+- Keyword-based FAQ matching
+- Suggested question prompts
+- Related FAQ recommendations
+- Chat interface with typing animation
+- Floating button for quick access
+
+### Usage
+1. Click the chat button (bottom-right corner)
+2. Type your question or select a suggested prompt
+3. Yaksha Mini will search our FAQ database
+4. Related FAQs are shown with clickable links
+
+### Supported Queries
+- NOC submission and documents
+- Mentor assignment and availability
+- GitHub setup and configuration
+- Zoom sessions and attendance
+- Team formation and projects
+- Certificates and evaluations
+
+## Voice Assistant
+
+Voice-powered support for hands-free interaction.
+
+### Features
+- Speech-to-text transcription
+- Pulsing microphone animation
+- Supported voice commands
+- Browser compatibility detection
+
+### Browser Support
+- Chrome (recommended)
+- Edge
+- Safari (limited)
+
+### Voice Commands
+- "Search for internship FAQs"
+- "Show my questions"
+- "How do I submit NOC?"
+
+## File Upload
+
+Document and image upload support.
+
+### Supported Formats
+- Images: JPG, PNG, GIF
+- Documents: PDF, DOC, DOCX
+
+### Constraints
+- Maximum file size: 5MB
+- Drag & drop or click to upload
+- Progress indicator
+- Preview before submission
+
+## FAQ Categories
+
+The platform includes 27 categories covering:
+
+- **Internship Basics** - Duration, application, prerequisites
+- **NOC & Documentation** - Certificate submission, verification
+- **Team Formation** - Allocation, conflicts, projects
+- **LMS & Courses** - Access, progress, curriculum
+- **Certificates** - Completion, verification, recommendations
+- **Attendance** - Policy, Zoom sessions, tracking
+- **Interviews** - Preparation, coding, take-home assignments
+- **GitHub Setup** - Repository, SSH keys, pull requests
+- **Open Source** - Contributions, evaluation
+- **AI Coursework** - ML, deep learning, tools
+- **Voice Sessions** - Mandatory sessions, connectivity
+- **Mentorship** - Assignment, meetings, changes
+- **Daily Workflow** - Standups, tasks, tracking
+- **Project Submission** - Requirements, deadlines
+- **Evaluations** - Scoring, feedback
+- **Account Access** - Login, password reset
+- **Troubleshooting** - Technical issues, bugs
 
 ## Database Schema
 
@@ -107,7 +204,7 @@ src/
 | id | uuid | Primary key |
 | question | text | Question title |
 | description | text | Detailed description |
-| category | text | Category (general, technical, billing, etc.) |
+| category | text | Category (27 categories available) |
 | tags | text[] | Array of tags |
 | created_by | uuid | References profiles |
 | view_count | integer | Number of views |
@@ -188,47 +285,6 @@ The application uses Supabase client SDK directly from the frontend. Key operati
 | VITE_SUPABASE_URL | Your Supabase project URL | Yes |
 | VITE_SUPABASE_ANON_KEY | Your Supabase anonymous key | Yes |
 
-## Features in Detail
-
-### Public FAQ Browsing
-- View all FAQs without signing in
-- Search questions by keyword
-- Filter by category
-- Sort by newest or most viewed
-
-### Authentication Flow
-- Email/password registration
-- Automatic profile creation on signup
-- Session persistence
-- Protected routes for authenticated users
-
-### Question & Answer System
-- Create questions with categories and tags
-- Rich accordion view for FAQ list
-- Reply to questions
-- Mark replies as accepted answers
-- View count tracking
-
-### User Profiles
-- View personal statistics
-- See all questions asked
-- See all replies posted
-- Edit display name
-
-## Screenshots
-
-### Home Page
-*Hero section with featured FAQs and trending questions*
-
-### FAQ Browser
-*Accordion-style FAQ list with search and filters*
-
-### Question Details
-*Full question view with replies and answer submission*
-
-### Profile Page
-*User statistics and activity overview*
-
 ## Security
 
 ### Row Level Security (RLS)
@@ -268,16 +324,9 @@ The backend is hosted on Supabase:
 - [ ] User reputation system
 - [ ] Admin dashboard
 - [ ] Analytics and reporting
-- [ ] Dark/Light theme toggle
 - [ ] Internationalization (i18n)
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- [ ] AI model integration (OpenAI/Anthropic)
+- [ ] Multi-language voice support
 
 ## License
 
@@ -292,5 +341,3 @@ This project is licensed under the MIT License.
 ---
 
 Built with modern web technologies and designed for the community.
-
-https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3--5173--4c73681d.local-credentialless.webcontainer-api.io/

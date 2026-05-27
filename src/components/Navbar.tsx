@@ -10,6 +10,7 @@ import {
   X,
   LogOut,
   Sparkles,
+  Bot,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -23,6 +24,7 @@ export function Navbar() {
   const navLinks = [
     { path: '/', label: 'Home', icon: Sparkles },
     { path: '/faqs', label: 'Browse FAQs', icon: MessageCircle },
+    { path: '/ai-help', label: 'AI Help', icon: Bot },
   ];
 
   const handleSignOut = async () => {

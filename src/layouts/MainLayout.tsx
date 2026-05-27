@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
+import { ChatbotButton } from '../components/ChatbotButton';
+import { YakshaMini } from '../components/YakshaMini';
 import { Toaster } from 'react-hot-toast';
 
 export function MainLayout() {
+  const [chatbotOpen, setChatbotOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col">
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950 -z-10" />
@@ -14,6 +19,18 @@ export function MainLayout() {
         <Outlet />
       </main>
       <Footer />
+
+      {/* Yaksha Mini Chatbot */}
+      <ChatbotButton
+        isOpen={chatbotOpen}
+        onClick={() => setChatbotOpen(!chatbotOpen)}
+      />
+      <YakshaMini
+        isOpen={chatbotOpen}
+        onClose={() => setChatbotOpen(false)}
+        onMinimize={() => setChatbotOpen(false)}
+      />
+
       <Toaster
         position="top-right"
         toastOptions={{
