@@ -11,6 +11,7 @@ import {
   LogOut,
   Sparkles,
   Bot,
+  Ticket,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -25,6 +26,7 @@ export function Navbar() {
     { path: '/', label: 'Home', icon: Sparkles },
     { path: '/faqs', label: 'Browse FAQs', icon: MessageCircle },
     { path: '/ai-help', label: 'AI Help', icon: Bot },
+    { path: '/tickets', label: 'Support Tickets', icon: Ticket },
   ];
 
   const handleSignOut = async () => {

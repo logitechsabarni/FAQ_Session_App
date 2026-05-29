@@ -10,6 +10,7 @@ import { FAQDetails } from '../pages/FAQDetails';
 import { Profile } from '../pages/Profile';
 import { NotFound } from '../pages/NotFound';
 import { AIHelpDesk } from '../pages/AIHelpDesk';
+import { Tickets } from '../pages/Tickets';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
       {
         path: 'ai-help',
         element: <AIHelpDesk />,
+      },
+      {
+        path: 'tickets',
+        element: (
+          <ProtectedRoute>
+            <Tickets />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '*',
